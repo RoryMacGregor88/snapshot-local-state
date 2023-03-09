@@ -15,7 +15,7 @@ const Header: FC<Props> = ({ appName }): ReactElement => {
   return (
     <header className="header flex justify-between p-10">
       <h1 className="font-bold">{t('greeting')} User</h1>
-      {appName ? <h1>{appName}</h1> : null}
+      <h1>{appName}</h1>
       <span className="flex items-center justify-between">
         <ThemeSwitcher />
         <LanguageSwitcher />
