@@ -6,6 +6,7 @@
     "dev": "vite --open",
     "dev:local": "VITE_USE_MSW=true vite --open",
     "test": "vitest watch",
+    "test:ci": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "cypress open",
     "test:e2e:run": "cypress run",
