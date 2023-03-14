@@ -2,7 +2,7 @@ import { FC, ReactElement } from 'react';
 
 import { useTranslation } from 'react-i18next';
 
-import { AppConfig } from '~/hooks/useAppConfig';
+import { AppConfig } from '~/app/useAppConfig';
 import { LanguageSwitcher } from '~/i18n/language-switcher.component';
 import { ThemeSwitcher } from '~/theme/theme-switcher.component';
 

@@ -2,9 +2,10 @@ import { FC, ReactElement } from 'react';
 
 import { Button } from '@astrosat/react-utils';
 
-import { useAppConfig } from '~/hooks/useAppConfig';
 import Footer from '~/layout/footer.component';
 import Header from '~/layout/header.component';
+
+import { useAppConfig } from './useAppConfig';
 
 const App: FC = (): ReactElement => {
   const { data: appConfig } = useAppConfig();
