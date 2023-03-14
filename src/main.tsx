@@ -1,31 +1,20 @@
 import React from 'react';
 
 import axe from '@axe-core/react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactDOM from 'react-dom/client';
 
 import App from '~/app/app.component';
+import { generateClient } from '~/utils/generate-client';
 
 import './i18n/i18n';
 
 import './index.css';
 
-const queryClientConfig = {
-  defaultOptions: {
-    queries: {
-      useErrorBoundary: true,
-    },
-    mutations: {
-      useErrorBoundary: true,
-    },
-  },
-};
-const queryClient = new QueryClient(queryClientConfig);
-
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <QueryClientProvider client={queryClient}>
+  <QueryClientProvider client={generateClient()}>
     <React.StrictMode>
       <App />
     </React.StrictMode>
