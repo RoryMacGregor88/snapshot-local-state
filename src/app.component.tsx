@@ -10,7 +10,7 @@ const App: FC = (): ReactElement => {
   const { data: appConfig } = useAppConfig();
   return (
     <div className="flex min-h-screen flex-col">
-      <Header appName={appConfig?.name ?? ''} />
+      <Header appConfig={appConfig} />
 
       <main className="grow">
         <h2>Main Content</h2>
