@@ -1,6 +1,5 @@
 import React from 'react';
 
-import axe from '@axe-core/react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactDOM from 'react-dom/client';
@@ -23,8 +22,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 );
 
 if (import.meta.env.DEV) {
-  // const axe = require('@axe-core/react');
-  axe(React, ReactDOM, 1000);
+  const axe = await import('@axe-core/react');
+  axe.default(React, ReactDOM, 1000);
 }
 
 // Don't use MSW when docker running, only during local development.
