@@ -1,7 +1,7 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
-const APP_CONFIG_ENDPOINT = 'api/app/config';
+const APP_CONFIG_ENDPOINT = 'http://localhost:3000/api/app/config';
 
 export const AppConfigData = z.object({
   name: z.string(),
@@ -15,7 +15,6 @@ export const useAppConfig = (): UseQueryResult<AppConfig> =>
     queryKey: ['appConfig'],
     queryFn: async () => {
       const response = await fetch(APP_CONFIG_ENDPOINT);
-
       if (!response.ok) {
         const error = await response.json();
         throw new Error(`Error fetching app config, Message: ${error.message}`);
