@@ -2,18 +2,24 @@ import '@testing-library/jest-dom';
 
 import '~/i18n/i18n';
 
-import fetch from 'node-fetch';
+import nodeFetch from 'node-fetch';
 
 import { server } from './src/mocks/server';
 
-// type global fetch
+// type of global fetch
 type GlobalFetch = (input: URL | RequestInfo, init?: RequestInit | undefined) => Promise<Response>;
 
-// cast nodeFetch as GlobalFetch type
-const nodeFetch = fetch as GlobalFetch;
+/**
+ * cast to unknown type as baseline for casting to other types
+ *
+ * from typescript: 'Conversion of type 'typeof fetch' to type 'GlobalFetch'
+ * may be a mistake because neither type sufficiently overlaps with the other.
+ * If this was intentional, convert the expression to 'unknown' first.'
+ */
+const fetch = nodeFetch as unknown as GlobalFetch;
 
 // override global fetch with node-fetch
-global.fetch = nodeFetch;
+global.fetch = fetch;
 
 beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
 afterAll(() => server.close());
