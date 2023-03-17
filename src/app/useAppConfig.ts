@@ -1,7 +1,7 @@
 import { UseQueryResult, useQuery } from '@tanstack/react-query';
 import { z } from 'zod';
 
-const APP_CONFIG_ENDPOINT = 'http://example.com/api/config';
+const APP_CONFIG_ENDPOINT = 'http://localhost:3000/api/app/config';
 
 export const AppConfigData = z.object({
   name: z.string(),

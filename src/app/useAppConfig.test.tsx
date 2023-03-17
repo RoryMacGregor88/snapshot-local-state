@@ -10,7 +10,7 @@ describe('useAppConfig', () => {
   it('should fetch data to configure the frontend', async () => {
     const config = { name: 'Test Name' };
 
-    server.use(rest.get('*/api/config', (req, res, ctx) => res(ctx.status(200), ctx.json(config))));
+    server.use(rest.get('*/api/app/config', (req, res, ctx) => res(ctx.status(200), ctx.json(config))));
 
     const { result } = renderHook(() => useAppConfig());
 
