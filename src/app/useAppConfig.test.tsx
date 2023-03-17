@@ -1,5 +1,5 @@
 import { rest } from 'msw';
-import { expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { server } from '~/mocks/server';
 import { renderHook, waitFor } from '~/test/utils';
