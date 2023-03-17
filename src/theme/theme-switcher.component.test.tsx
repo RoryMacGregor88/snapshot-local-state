@@ -22,7 +22,7 @@ describe('Theme Switcher', () => {
 
     await userEvent.click(button);
 
-    expect(screen.queryByRole(button)).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: /activate light mode/i })).not.toBeInTheDocument();
     expect(screen.getByRole('button', { name: /activate dark mode/i })).toBeInTheDocument();
   });
 });
