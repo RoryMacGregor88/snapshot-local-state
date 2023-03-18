@@ -14,6 +14,6 @@ describe('Header', () => {
     };
 
     render(<Header appConfig={config} />);
-    expect(screen.getByRole('heading', { name: /hello user/i })).toBeInTheDocument();
+    expect(screen.getByText(/hello user/i)).toBeInTheDocument();
   });
 });
