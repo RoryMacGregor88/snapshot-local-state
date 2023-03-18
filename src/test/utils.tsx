@@ -1,21 +1,26 @@
-/* eslint-disable import/export */
 import { ReactElement, ReactNode } from 'react';
 
 import { RenderOptions } from '@storybook/addons';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { RenderHookOptions, RenderHookResult, cleanup, render, renderHook } from '@testing-library/react';
-import { afterEach } from 'vitest';
+import { QueryClient, QueryClientConfig, QueryClientProvider } from '@tanstack/react-query';
+import { RenderHookOptions, RenderHookResult, render, renderHook } from '@testing-library/react';
 
-import { generateClient } from '~/utils/generate-client';
+const queryClientConfig: QueryClientConfig = {
+  defaultOptions: {
+    queries: {
+      retry: false,
+    },
+    mutations: {
+      retry: false,
+    },
+  },
+};
 
-afterEach(() => {
-  cleanup();
-});
+const queryClient = new QueryClient(queryClientConfig);
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
   render(ui, {
     wrapper: ({ children }: { children: ReactNode }): ReactElement => (
-      <QueryClientProvider client={generateClient()}>{children}</QueryClientProvider>
+      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     ),
     ...options,
   });
@@ -27,7 +32,6 @@ type HookResult = RenderHookResult<
   },
   unknown
 >;
-
 /**
  * Custom renderHook to replace renderHook from testing library
  *
@@ -38,7 +42,7 @@ type HookResult = RenderHookResult<
  */
 const customRenderHook = (callback: () => unknown, options?: RenderHookOptions<unknown>): HookResult => {
   const wrapper = ({ children }: { children: ReactNode }): ReactElement => (
-    <QueryClientProvider client={generateClient()}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 
   const utils = renderHook(() => callback(), { wrapper, ...options });
