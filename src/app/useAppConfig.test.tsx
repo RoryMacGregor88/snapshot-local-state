@@ -14,6 +14,7 @@ describe('useAppConfig', () => {
 
     const { result } = renderHook(() => useAppConfig());
 
+    // await waitFor(() => expect(result.current.isSuccess).toBe(true));
     await waitFor(() => expect(result.current.data).toEqual(config));
   });
 });
