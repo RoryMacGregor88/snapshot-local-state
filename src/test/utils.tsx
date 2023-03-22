@@ -25,13 +25,6 @@ const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>
     ...options,
   });
 
-type HookResult = RenderHookResult<
-  {
-    isSuccess: boolean;
-    data: unknown;
-  },
-  unknown
->;
 /**
  * Custom renderHook to replace renderHook from testing library
  *
@@ -40,13 +33,16 @@ type HookResult = RenderHookResult<
  *
  * @returns - object, see here for shape: https://react-hooks-testing-library.com/reference/api#renderhook-result
  */
-const customRenderHook = (callback: () => unknown, options?: RenderHookOptions<unknown>): HookResult => {
+const customRenderHook = <T, P>(
+  callback: () => unknown,
+  options?: RenderHookOptions<unknown>,
+): RenderHookResult<T, P> => {
   const wrapper = ({ children }: { children: ReactNode }): ReactElement => (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
 
   const utils = renderHook(() => callback(), { wrapper, ...options });
-  return utils as HookResult;
+  return utils as RenderHookResult<T, P>;
 };
 
 export * from '@testing-library/react';
