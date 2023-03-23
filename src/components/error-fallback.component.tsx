@@ -59,7 +59,7 @@ export const ErrorFallback: FC<Props> = ({
     {isError ? (
       <div>
         <p>Unable to send error report:</p>
-        <p>{failure}</p>
+        <p>{failure instanceof Error}</p>
       </div>
     ) : null}
 

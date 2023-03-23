@@ -4,7 +4,12 @@ import { describe, expect, it } from 'vitest';
 import { server } from '~/mocks/server';
 import { renderHook, waitFor } from '~/test/utils';
 
-import { useAppConfig } from './useAppConfig';
+import { AppConfig, useAppConfig } from './useAppConfig';
+
+interface Result {
+  isSuccess: boolean;
+  data: AppConfig;
+}
 
 describe('useAppConfig', () => {
   it('should fetch data to configure the frontend', async () => {
@@ -12,9 +17,8 @@ describe('useAppConfig', () => {
 
     server.use(rest.get('*/api/app/config', (req, res, ctx) => res(ctx.status(200), ctx.json(config))));
 
-    const { result } = renderHook(() => useAppConfig());
+    const { result } = renderHook<Result, unknown>(() => useAppConfig());
 
-    // await waitFor(() => expect(result.current.isSuccess).toBe(true));
     await waitFor(() => expect(result.current.data).toEqual(config));
   });
 });

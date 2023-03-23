@@ -10,8 +10,8 @@ interface ErrorReportResponse {
   stackTrace: string;
 }
 
-const handleErrorReport = rest.post<ErrorReport, ErrorReportResponse>('*/api/error/report', (req, res, ctx) => {
-  const body = JSON.parse(req.body);
+const handleErrorReport = rest.post<string, ErrorReportResponse>('*/api/error/report', async (req, res, ctx) => {
+  const body: ErrorReport = await req.json();
   const report = addErrorReport(body);
 
   return res(ctx.status(200), ctx.json(report));
