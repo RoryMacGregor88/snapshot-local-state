@@ -5,7 +5,7 @@ import { useSnapshots } from '~/snapshots/use-snapshot.hook';
 export const useSaveSnapshot = () => {
   const QC = useQueryClient();
   const { localState } = useSnapshots();
-  console.log('locaolState: ', localState);
+
   return useMutation({
     mutationKey: ['snapshots'],
     mutationFn: async (): Promise<null> => {

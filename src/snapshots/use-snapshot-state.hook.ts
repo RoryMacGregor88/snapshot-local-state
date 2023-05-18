@@ -12,14 +12,12 @@ const useSnapshotState = <T>(value: unknown, key: string): [T, SnapshotStateSett
 
   const [state, setState] = useState<T>(initialState);
 
-  const wrappedSetState: SnapshotStateSetter = useCallback(
-    (value: StateSetterValue) => {
-      const newState = typeof value === 'function' ? value(state) : value;
-      updateLocalState({ [key]: newState });
-      setState(newState);
-    },
-    [key, state, updateLocalState],
-  );
+  const wrappedSetState = useCallback((value: StateSetterValue) => {
+    const newState = typeof value === 'function' ? value(state) : value;
+    updateLocalState({ [key]: newState });
+    setState(newState);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     wrappedSetState(initialState);
