@@ -1,0 +1,6 @@
+
+1. snapshot provider wraps entire app
+2. react state setter wrapper
+3. update state to 'current snapshot state'
+4. save snapshot when clicked
+5. load snapshot into state, re-render app

@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { render, screen } from '~/test/utils';
 
-import App from './app.component';
+import { App } from './app.component';
 
 describe('App', () => {
   it('should render the whole app', () => {

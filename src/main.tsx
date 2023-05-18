@@ -4,11 +4,10 @@ import { QueryClient, QueryClientConfig, QueryClientProvider } from '@tanstack/r
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import ReactDOM from 'react-dom/client';
 
-import App from '~/app/app.component';
-
+import { App } from '~/app/app.component';
 import './i18n/i18n';
-
 import './index.css';
+import { SnapshotProvider } from '~/snapshots/snapshot.context';
 
 const queryClientConfig: QueryClientConfig = {
   defaultOptions: {
@@ -25,12 +24,14 @@ const config = new QueryClient(queryClientConfig);
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <QueryClientProvider client={config}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-    <ReactQueryDevtools initialIsOpen={false} />
-  </QueryClientProvider>,
+  <SnapshotProvider>
+    <QueryClientProvider client={config}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  </SnapshotProvider>,
 );
 
 if (import.meta.env.DEV) {
